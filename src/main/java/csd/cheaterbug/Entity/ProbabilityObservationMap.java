@@ -1,4 +1,4 @@
-package csd.cheaterbug;
+package csd.cheaterbug.Entity;
 
 import java.util.TreeMap;
 import java.util.Map;

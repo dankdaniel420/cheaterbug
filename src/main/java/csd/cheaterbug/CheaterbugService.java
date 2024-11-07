@@ -10,6 +10,10 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 
+import csd.cheaterbug.Entity.ProbabilityObservationMap;
+import csd.cheaterbug.Entity.Response;
+import csd.cheaterbug.Entity.Result;
+
 @Service
 public class CheaterbugService {
 

@@ -1,4 +1,4 @@
-package csd.cheaterbug;
+package csd.cheaterbug.Entity;
 
 import lombok.Getter;
 import lombok.AllArgsConstructor;

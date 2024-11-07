@@ -3,6 +3,11 @@ package csd.cheaterbug;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import csd.cheaterbug.Entity.Request;
+import csd.cheaterbug.Entity.Response;
+import csd.cheaterbug.Entity.Result;
+
 import org.springframework.web.bind.annotation.RequestBody;
 
 import org.slf4j.Logger;

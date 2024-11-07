@@ -1,6 +1,10 @@
 package csd.cheaterbug;
 
 import org.springframework.boot.test.context.SpringBootTest;
+
+import csd.cheaterbug.Entity.Response;
+import csd.cheaterbug.Entity.Result;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
