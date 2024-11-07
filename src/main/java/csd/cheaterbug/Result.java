@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class Result {
-    private static final Double ALPHA = 0.005;
     private static final Double BASE_K = 1.7;
 
     // Based on entered results via API
@@ -38,7 +37,7 @@ public class Result {
      * 
      */
     private void calculateCheatScore() {
-        this.cheatScore = 1 - Math.pow(1 - this.expectedScore, BASE_K + ALPHA * Math.abs(0.5 - this.expectedScore));
+        this.cheatScore = 1 - Math.pow(1 - this.expectedScore, BASE_K + Math.abs(1.0 - this.expectedScore));
     }
 
     /**
@@ -75,5 +74,37 @@ public class Result {
     private Double calculateWeightOfScore(final Double score, final Double predictedScore) {
         Double distance = Math.abs(score - predictedScore);
         return 1 / distance + 0.01;
+    }
+
+    public Double getPLoseType(String type) {
+        if (type.equals("expected")) {
+            return pLoseExpected;
+        } else {
+            return pLoseCheat;
+        }
+    }
+
+    public Double getPDrawType(String type) {
+        if (type.equals("expected")) {
+            return pDrawExpected;
+        } else {
+            return pDrawCheat;
+        }
+    }
+
+    public Double getPWinType(String type) {
+        if (type.equals("expected")) {
+            return pWinExpected;
+        } else {
+            return pWinCheat;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Result [expectedScore=" + expectedScore + ", actualScore=" + actualScore + ", cheatScore=" + cheatScore
+                + ", pWinExpected=" + pWinExpected + ", pDrawExpected=" + pDrawExpected + ", pLoseExpected="
+                + pLoseExpected + ", pWinCheat=" + pWinCheat + ", pDrawCheat=" + pDrawCheat + ", pLoseCheat="
+                + pLoseCheat + "]";
     }
 }

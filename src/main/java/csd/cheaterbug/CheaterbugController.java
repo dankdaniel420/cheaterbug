@@ -1,6 +1,5 @@
 package csd.cheaterbug;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +19,6 @@ public class CheaterbugController {
 
     private final CheaterbugService cheaterbugService;
 
-    @Autowired
     public CheaterbugController(CheaterbugService cheaterbugService) {
         this.cheaterbugService = cheaterbugService;
     }
@@ -35,6 +33,8 @@ public class CheaterbugController {
             // TODO remove DEBUG 2
             // logger.info(String.format("Received Expected: %f Actual: %f", r.getExpectedScore(), r.getActualScore()));
             Result result = new Result(r.getExpectedScore(), r.getActualScore());
+            // TODO remove DEBUG 3
+            logger.info(result.toString());
             resultsList.add(result);
         }
         return cheaterbugService.getAnalysis(resultsList);
