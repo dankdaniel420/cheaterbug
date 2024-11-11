@@ -1,5 +1,7 @@
 package csd.cheaterbug;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import csd.cheaterbug.Entity.Request;
 import csd.cheaterbug.Entity.Response;
@@ -32,5 +34,11 @@ public class CheaterbugController {
             .collect(Collectors.toList());
 
         return cheaterbugService.getAnalysis(resultsList);
+    }
+
+    @GetMapping("/analysis")
+    public ResponseEntity<String> handleGetRequest() {
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
+                             .body("This endpoint only supports POST requests with JSON data.");
     }
 }
