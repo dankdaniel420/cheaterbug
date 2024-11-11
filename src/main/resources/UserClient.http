@@ -1,0 +1,73 @@
+### Analyze Results - Success
+POST http://localhost:8080/cheaterbug/analysis
+Content-Type: application/json
+
+[
+    {
+        "expectedScore": 0.7,
+        "actualScore": 1.0
+    },
+    {
+        "expectedScore": 0.3,
+        "actualScore": 0.0
+    }
+]
+
+### Analyze Results - Missing expectedScore
+POST http://localhost:8080/cheaterbug/analysis
+Content-Type: application/json
+
+[
+    {
+        "actualScore": 1.0
+    }
+]
+
+### Analyze Results - Missing actualScore
+POST http://localhost:8080/cheaterbug/analysis
+Content-Type: application/json
+
+[
+    {
+        "expectedScore": 0.7
+    }
+]
+
+### Analyze Results - Negative expectedScore
+POST http://localhost:8080/cheaterbug/analysis
+Content-Type: application/json
+
+[
+    {
+        "expectedScore": -0.5,
+        "actualScore": 0.8
+    }
+]
+
+### Analyze Results - Negative actualScore
+POST http://localhost:8080/cheaterbug/analysis
+Content-Type: application/json
+
+[
+    {
+        "expectedScore": 0.5,
+        "actualScore": -0.8
+    }
+]
+
+### Analyze Results - Empty Request Body
+POST http://localhost:8080/cheaterbug/analysis
+Content-Type: application/json
+
+[]
+
+### Analyze Results - Invalid Data Type
+POST http://localhost:8080/cheaterbug/analysis
+Content-Type: application/json
+
+[
+    {
+        "expectedScore": "high",
+        "actualScore": 1.0
+    }
+]
