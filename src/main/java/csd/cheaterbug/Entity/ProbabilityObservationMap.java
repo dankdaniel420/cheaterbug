@@ -13,6 +13,12 @@ public class ProbabilityObservationMap {
         map = new TreeMap<>();
     }
 
+    /**
+     * Add a new entry to the map
+     * 
+     * @param key Double
+     * @param value Integer
+     */ 
     public void addEntry(Double key, Integer value) {
         Double roundedKey = roundToSignificantFigure(key, KEY_SIGNIFICANT_FIGURES);
 
@@ -23,6 +29,11 @@ public class ProbabilityObservationMap {
         }
     }
 
+    /**
+     * Get the entry set of the probability observation map
+     * 
+     * @return Set of map entries of probability : observations
+     */
     public Set<Map.Entry<Double, Integer>> getEntries() {
         return map.entrySet();
     }
@@ -58,7 +69,7 @@ public class ProbabilityObservationMap {
         Integer totalEntries = map.values().stream().mapToInt(Integer::intValue).sum();
         Double nthEntry = totalEntries * (nPercentile);
 
-        if (nthEntry <= 1) {
+        if (nthEntry < 1 || nthEntry > totalEntries-1 ) {
             return "Not enough data to calculate percentile probability";  
         }
 
@@ -68,6 +79,12 @@ public class ProbabilityObservationMap {
             / 2.0);
     }
 
+    /**
+     * Get the probability stored at the index
+     * 
+     * @param index Integer
+     * @return Double
+     */
     private Double getIndexProbability(Integer index) {
         int current_index = 0;
         for (Double probability : map.keySet()) {
@@ -77,10 +94,5 @@ public class ProbabilityObservationMap {
             }
         }
         return 0.0;
-    }
-
-    @Override
-    public String toString() {
-        return "ProbabilityObservationMap [map=" + map + "]";
     }
 }

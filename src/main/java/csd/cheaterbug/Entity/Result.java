@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class Result {
-    private static final Double BASE_K = 1.7;
+    private static final Double KCONSTANT = 2.9;
 
     // Based on entered results via API
     private Double expectedScore;
@@ -32,12 +32,13 @@ public class Result {
     /**
      * Set the cheat score based on this formula:
      * cheatScore = 1 - (1 - expectedScore)^k
-     * where k = baseK + alpha * |0.5 - expectedScore|
+     * where k = exponential function for KCONSTANT * (1 - expectedScore)
+     * And KCONSTANT is such that for expected score of 0.1, cheat score is >= 0.75
      * This allows k to be dyanmic and have a higher impact for greater differences in expected score
      * 
      */
     private void calculateCheatScore() {
-        this.cheatScore = 1 - Math.pow(1 - this.expectedScore, BASE_K + Math.abs(1.0 - this.expectedScore));
+        this.cheatScore = 1 - Math.pow(1 - this.expectedScore, Math.exp(KCONSTANT * (1 - this.expectedScore)));
     }
 
     /**
@@ -76,6 +77,12 @@ public class Result {
         return 1 / distance + 0.01;
     }
 
+    /**
+     * Get the probability of the lose based on the type
+     * 
+     * @param type "expected" or "cheat"
+     * @return Double
+     */
     public Double getPLoseType(String type) {
         if (type.equals("expected")) {
             return pLoseExpected;
@@ -84,6 +91,12 @@ public class Result {
         }
     }
 
+    /**
+     * Get the probability of the draw based on the type
+     * 
+     * @param type "expected" or "cheat"
+     * @return Double
+     */
     public Double getPDrawType(String type) {
         if (type.equals("expected")) {
             return pDrawExpected;
@@ -92,19 +105,17 @@ public class Result {
         }
     }
 
+    /**
+     * Get the probability of the win based on the type
+     * 
+     * @param type "expected" or "cheat"
+     * @return Double
+     */
     public Double getPWinType(String type) {
         if (type.equals("expected")) {
             return pWinExpected;
         } else {
             return pWinCheat;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Result [expectedScore=" + expectedScore + ", actualScore=" + actualScore + ", cheatScore=" + cheatScore
-                + ", pWinExpected=" + pWinExpected + ", pDrawExpected=" + pDrawExpected + ", pLoseExpected="
-                + pLoseExpected + ", pWinCheat=" + pWinCheat + ", pDrawCheat=" + pDrawCheat + ", pLoseCheat="
-                + pLoseCheat + "]";
     }
 }
